@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Api</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="formdiv">
+
+        <form onsubmit="event.preventDefault();">
+            <label for="city">Enter a city</label>
+            <br>
+            <input type="text" id="city">
+            <br>
+            <input type="submit" value="Get Weather Status" onclick="myfunction()" id="submit">
+        </form>
+    </div>
+
+    <div id="demo">
+        <table id="table1">
+            <tr>
+
+                <th>temperature in celcius</th>
+                <th>temperature in fahrenheit</th>
+                <th>Country</th>
+                <th>Time</th>
+                <th>Condition</th>
+                <th>Icon</th>
+             
+
+            </tr>
+            <tr>
+                <td id="celcius"></td>
+                <td id="fahr"></td>
+                <td id="country"></td>
+                <td id="time"></td>
+                <td id="condition"></td>
+                <td><img alt="" id="icon"></td>
+            </tr>
+        </table>
+    </div>
+        
+    <script>
+        function myfunction(){
+            
+            let city =  document.getElementById("city").value;
+
+            var xhttp = new XMLHttpRequest();
+            
+            var address = 'http://api.weatherapi.com/v1/current.json?key=ca6896b5d01c4203b1654947221804&q=' + city + '&aqi=yes';
+
+            // console.log(address);
+
+            xhttp.onreadystatechange=function(){
+                if(this.status == 200 && this.readyState == 4){
+                    loadApi(this);
+                }
+            }
+            xhttp.open("GET",address,true);
+            xhttp.send();
+
+            function loadApi(data){
+
+                let myObj = JSON.parse(data.responseText);
+
+                console.log(myObj);
+
+                document.getElementById("celcius").innerHTML = myObj.current.temp_c;
+                document.getElementById("fahr").innerHTML = myObj.current.temp_f;
+                document.getElementById("country").innerHTML = myObj.location.country;
+                document.getElementById("time").innerHTML = myObj.location.localtime;
+                document.getElementById("condition").innerHTML = myObj.current.condition.text;
+                document.getElementById("icon").src = 'https:'+myObj.current.condition.icon;
+
+            }
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+.formdiv{
+    text-align: center;
+}
+#demo{
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+#table1{
+    text-align: center;
+    background-color: aliceblue;
+}
+th{
+    font-size: 20px;
+    border: 1px solid;
+    padding: 10px;
+}
+
+td{
+    font-size: 20px;
+    border: 1px solid grey;
+    padding: 13px;
+    color:blue;
+}
+
+#city{
+    padding: 5px;
+    font-size: 17px;
+}
+
+#submit{
+    padding: 10px;
+    margin: 10px 0;
+    background-color: antiquewhite;
+}
